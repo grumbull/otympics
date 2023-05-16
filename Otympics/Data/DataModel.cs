@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Reflection;
 using CsvHelper;
 namespace Otympics.Data;
 
@@ -6,7 +7,7 @@ public class OtympicsData
 {
     private static readonly object _lock = new object();
 
-    public const string RootDataDir = "/Users/mike/Dev/Otympics/data";
+    public static readonly string RootDataDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "..", "..", "..", "..","data");
     public static readonly string UsersFile = Path.Combine(RootDataDir, "users.csv");
     public static readonly string EventsFile = Path.Combine(RootDataDir, "events.csv");
 
@@ -33,6 +34,7 @@ public class OtympicsData
                 Console.WriteLine($"{record.Name}");
                 UserLookup[record.Name] = record;
             }
+            Console.WriteLine(UserLookup.Count);
         }
     }
 
