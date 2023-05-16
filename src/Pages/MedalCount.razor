@@ -1,0 +1,43 @@
+﻿@using Otympics.Data
+@inject OtympicsData MainData
+<PageTitle>Otypmics</PageTitle>
+
+<h1>Medal Count</h1>
+
+@if (MainData == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Total Medals</th>
+                <th>&#129351;</th>
+                <th>&#129352;</th>
+                <th>&#129353;</th>
+                <th>&#128169;</th>
+                <th>Total Events</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for (int i = 0; i < MainData.GetUsers().Count; i++)
+        {
+            var user = MainData.GetUsers()[i];
+            <tr>
+                <td>@(i+1)</td
+                <td>@user.Flag @user.Name</td>
+                <td>@user.TotalMedals</td>
+                <td>@user.Gold</td>
+                <td>@user.Silver</td>
+                <td>@user.Bronze</td>
+                <td>@user.DNP</td>
+                <td>@user.TotalEvents</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,37 @@
+﻿@page "/37146"
+@using Otympics.Data
+@inject OtympicsData MainData
+@inject NavigationManager Navigation
+<PageTitle>Otypmics</PageTitle>
+
+<h1>Simple Event Add</h1>
+
+<h2>Gold</h2>
+<UserSelect @bind-Selected="gold" />
+
+<h2>Silver</h2>
+<UserSelect @bind-Selected="silver" />
+
+<h2>Bronze</h2>
+<UserSelect @bind-Selected="bronze" />
+
+<h2>DNP</h2>
+<UserSelect @bind-Selected="dnp" />
+
+<br/>
+<br/>
+
+<button @onclick="Submit"> Submit</button>
+
+@code{
+    HashSet<string> gold;
+    HashSet<string> silver; 
+    HashSet<string> bronze;
+    HashSet<string> dnp;
+
+    private void Submit(){
+        MainData.SimpleEventAdd(gold, silver, bronze, dnp);
+        MainData.SerializeUserData();
+        Navigation.NavigateTo("/medals");
+    }
+}
