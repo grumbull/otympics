@@ -1,5 +1,7 @@
-.config
-.DS_Store
-.vscode
-src/obj/
-src/bin/
+.config/
+.DS_Store/
+.vscode/
+.vs/
+Otympics/obj/
+Otympics/bin/
+Otympics/Properties/PublishProfiles 

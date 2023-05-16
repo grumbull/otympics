@@ -5,15 +5,26 @@ namespace Otympics.Data;
 
 public class OtympicsData
 {
-    private static readonly object _lock = new object();
+    public static readonly string LocalDataDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "..", "..", "..", "..", "data");
+    public static readonly string ServerDataDir = @"h:\root\home\grumbull-001\www\otympics-data\";
 
-    public static readonly string RootDataDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "..", "..", "..", "..","data");
-    public static readonly string UsersFile = Path.Combine(RootDataDir, "users.csv");
-    public static readonly string EventsFile = Path.Combine(RootDataDir, "events.csv");
+    public string RootDir { get; }
+    public string UsersFile => Path.Combine(RootDir, "users.csv");
+    public string EventsFile => Path.Combine(RootDir, "events.csv");
+
+    private readonly object _lock = new object();
 
     public OtympicsData()
     {
-        Directory.CreateDirectory(RootDataDir);
+        if (Directory.Exists(ServerDataDir))
+        {
+            RootDir = ServerDataDir;
+        }
+        else
+        {
+            RootDir = LocalDataDir;
+        }
+
         if (!File.Exists(UsersFile))
         {
             Console.WriteLine($"Creating user file at: {UsersFile}");
@@ -21,7 +32,7 @@ public class OtympicsData
         }
         if (!File.Exists(EventsFile))
         {
-            Console.WriteLine($"Creating user file at: {UsersFile}");
+            Console.WriteLine($"Creating event file at: {UsersFile}");
             File.Create(EventsFile);
         }
 
@@ -61,40 +72,45 @@ public class OtympicsData
 
     public void SimpleEventAdd(HashSet<string> gold, HashSet<string> silver, HashSet<string> bronze, HashSet<string> dnp)
     {
-        foreach (var user in gold)
+        lock (_lock)
         {
-            Console.WriteLine($"Adding gold for {user}");
-            var userData = UserLookup[user];
-            userData.Gold++;
-        }
-        foreach (var user in silver)
-        {
-            Console.WriteLine($"Adding silver for {user}");
-            var userData = UserLookup[user];
-            userData.Silver++;
-        }
-        foreach (var user in bronze)
-        {
-            Console.WriteLine($"Adding bronze for {user}");
-            var userData = UserLookup[user];
-            userData.Bronze++;
-        }
-        foreach (var user in dnp)
-        {
-            Console.WriteLine($"Adding dnp for {user}");
-            var userData = UserLookup[user];
-            userData.DNP++;
+            foreach (var user in gold)
+            {
+                Console.WriteLine($"Adding gold for {user}");
+                var userData = UserLookup[user];
+                userData.Gold++;
+            }
+            foreach (var user in silver)
+            {
+                Console.WriteLine($"Adding silver for {user}");
+                var userData = UserLookup[user];
+                userData.Silver++;
+            }
+            foreach (var user in bronze)
+            {
+                Console.WriteLine($"Adding bronze for {user}");
+                var userData = UserLookup[user];
+                userData.Bronze++;
+            }
+            foreach (var user in dnp)
+            {
+                Console.WriteLine($"Adding dnp for {user}");
+                var userData = UserLookup[user];
+                userData.DNP++;
+            }
         }
     }
 
     public void SerializeUserData()
     {
-        using (var writer = new StreamWriter(UsersFile))
-        using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+        lock (_lock)
         {
-            csv.WriteRecords(UserLookup.Values.ToList());
+            using (var writer = new StreamWriter(UsersFile))
+            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+                csv.WriteRecords(UserLookup.Values.ToList());
+            }
         }
-
     }
 }
 

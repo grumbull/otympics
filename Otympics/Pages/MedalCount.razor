@@ -1,6 +1,6 @@
 ﻿@using Otympics.Data
 @inject OtympicsData MainData
-<PageTitle>Otypmics</PageTitle>
+<PageTitle>Otympics</PageTitle>
 
 <h1>Medal Count</h1>
 
@@ -15,12 +15,12 @@ else
             <tr>
                 <th></th>
                 <th>Name</th>
-                <th>Total Medals</th>
+                <th>&#127942;</th>
                 <th>&#129351;</th>
                 <th>&#129352;</th>
                 <th>&#129353;</th>
                 <th>&#128169;</th>
-                <th>Total Events</th>
+                <th>&#9654;&#65039;</th>
             </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@ else
         {
             var user = MainData.GetUsers()[i];
             <tr>
-                <td>@(i+1)</td
+                <td>@(i+1)</td>
                 <td>@user.Flag @user.Name</td>
                 <td>@user.TotalMedals</td>
                 <td>@user.Gold</td>
