@@ -1,3 +1,5 @@
 .config
-.vscode
 .DS_Store
+.vscode
+src/obj/
+src/bin/
