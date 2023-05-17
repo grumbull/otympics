@@ -2,6 +2,21 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color:#313338;
+}
+
+#biglogo {
+    max-width:40rem;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.page-header{
+    margin:auto;
+    text-align:center
 }
 
 h1:focus {
@@ -11,6 +26,12 @@ h1:focus {
 a, .btn-link {
     color: #0071c1;
 }
+
+.table tr{
+    color: whitesmoke;
+    border-bottom: 4px solid rgb(44, 46, 51)
+}
+
 
 .btn-primary {
     color: #fff;
@@ -24,6 +45,7 @@ a, .btn-link {
 
 .content {
     padding-top: 1.1rem;
+    color: whitesmoke;
 }
 
 .valid.modified:not([type=checkbox]) {

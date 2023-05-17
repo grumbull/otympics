@@ -1,0 +1,42 @@
+﻿@page "/701764913"
+@using Otympics.Data
+@inject OtympicsData MainData
+@inject NavigationManager Navigation
+
+<img id="biglogo" src="images/big-logo.png" alt="The correct spelling." class="">
+<div class="page-header">
+    <h1>Admin</h1>
+</div>
+
+@if (MainData == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>&#129351;</th>
+                <th>&#129352;</th>
+                <th>&#129353;</th>
+                <th>&#128169;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in MainData.GetUsersByName())
+            {
+                <UserAdminRow User="user"></UserAdminRow>
+            }
+        </tbody>
+    </table>
+}
+
+@code
+{
+    private void Submit(){
+        MainData.SerializeUserData();
+        Navigation.NavigateTo("/medals");
+    }
+}

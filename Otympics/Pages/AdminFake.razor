@@ -1,0 +1,19 @@
+﻿@page "/admin"
+@using Otympics.Data
+@inject OtympicsData MainData
+@inject NavigationManager Navigation
+
+<p>a haiku, for you:</p>
+<br/>
+<h1>did you really think</h1>
+<h1>i would let just anyone</h1>
+<h1>update medal counts?</h1>
+
+
+@code
+{
+    private void Submit(){
+        MainData.SerializeUserData();
+        Navigation.NavigateTo("/medals");
+    }
+}

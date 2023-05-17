@@ -52,12 +52,22 @@ public class OtympicsData
     public Dictionary<string, User> UserLookup { get; set; } = new();
     public Dictionary<string, Game> GameLookup { get; set; } = new();
 
-    public List<User> GetUsers()
+    public List<User> GetUsersByScore()
     {
         lock (_lock)
         {
             var users = new List<User>(UserLookup.Values);
             users.Sort();
+            return users;
+        }
+    }
+
+    public List<User> GetUsersByName()
+    {
+        lock (_lock)
+        {
+            var users = new List<User>(UserLookup.Values);
+            users.Sort((a, b) => a.Name.CompareTo(b.Name));
             return users;
         }
     }

@@ -1,8 +1,13 @@
-﻿@using Otympics.Data
+﻿@page "/medals"
+@page "/"
+@using Otympics.Data
 @inject OtympicsData MainData
-<PageTitle>Otympics</PageTitle>
 
-<h1>Medal Count</h1>
+
+<img id="biglogo" src="images/big-logo.png" alt="The correct spelling." class="">
+<div class="page-header">
+    <h1>Medal Count</h1>
+</div>
 
 @if (MainData == null)
 {
@@ -24,20 +29,20 @@ else
             </tr>
         </thead>
         <tbody>
-        @for (int i = 0; i < MainData.GetUsers().Count; i++)
-        {
-            var user = MainData.GetUsers()[i];
-            <tr>
-                <td>@(i+1)</td>
-                <td>@user.Flag @user.Name</td>
-                <td>@user.TotalMedals</td>
-                <td>@user.Gold</td>
-                <td>@user.Silver</td>
-                <td>@user.Bronze</td>
-                <td>@user.DNP</td>
-                <td>@user.TotalEvents</td>
-            </tr>
-        }
+            @for (int i = 0; i < MainData.GetUsersByScore().Count; i++)
+            {
+                var user = MainData.GetUsersByScore()[i];
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@user.Flag @user.Name</td>
+                    <td><p style="font-weight:900">@user.TotalMedals</p></td>
+                    <td>@user.Gold</td>
+                    <td>@user.Silver</td>
+                    <td>@user.Bronze</td>
+                    <td>@user.DNP</td>
+                    <td>@user.TotalEvents</td>
+                </tr>
+            }
         </tbody>
     </table>
 }
