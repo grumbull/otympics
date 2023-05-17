@@ -150,7 +150,7 @@ public class User : IComparable<User>
 
         if (medalCompare != 0) { return medalCompare; }
         if (goldCompare != 0) { return goldCompare; }
-        if (silverCompare != 0) { return goldCompare; }
+        if (silverCompare != 0) { return silverCompare; }
         if (bronzeCompare != 0) { return bronzeCompare; }
         if (eventCompare != 0) { return eventCompare; }
         return Name.CompareTo(other.Name);

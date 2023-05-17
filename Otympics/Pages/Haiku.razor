@@ -1,4 +1,11 @@
 ﻿@page "/admin"
+@page "/updatemedals"
+@page "/update_medals"
+@page "/update-medals"
+@page "/setmedals"
+@page "/set_medals"
+@page "/set-medals"
+
 @using Otympics.Data
 @inject OtympicsData MainData
 @inject NavigationManager Navigation
@@ -8,12 +15,3 @@
 <h1>did you really think</h1>
 <h1>i would let just anyone</h1>
 <h1>update medal counts?</h1>
-
-
-@code
-{
-    private void Submit(){
-        MainData.SerializeUserData();
-        Navigation.NavigateTo("/medals");
-    }
-}

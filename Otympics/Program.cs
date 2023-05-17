@@ -8,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<OtympicsData>();
-builder.Services.AddSingleton<WeatherForecastService>();
 
 var app = builder.Build();
 
